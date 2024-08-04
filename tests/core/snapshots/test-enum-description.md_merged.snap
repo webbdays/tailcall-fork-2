@@ -1,0 +1,19 @@
+---
+source: tests/core/spec.rs
+expression: formatter
+---
+schema @server @upstream(baseURL: "http://localhost:8080") {
+  query: Query
+}
+
+"""
+Description of enum Foo
+"""
+enum Foo {
+  BAR
+  BAZ
+}
+
+type Query {
+  foo(val: String!): Foo @expr(body: "{{.args.val}}")
+}

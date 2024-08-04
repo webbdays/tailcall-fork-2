@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package movies;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/duration.proto";
+
+// This is a comment for Genre enum
+enum Genre {
+    // This is a comment for UNSPECIFIED variant
+    UNSPECIFIED = 0;
+    ACTION = 1;
+    // This is a comment for DRAMA variant
+    DRAMA = 2;
+}
+
+/**
+ * movie message payload
+ */
+message Movie {
+    string name = 1;
+    google.protobuf.Int32Value year = 2;
+    float rating = 3;
+
+    /**
+     * list of cast
+     */
+    repeated string cast = 4;
+    google.protobuf.Timestamp time = 5;
+    Genre genre = 6;
+	google.protobuf.Duration duration = 7;
+
+    // Represents the format in which a movie can be released
+    enum MovieFormat {
+        // The movie is released in IMAX format
+        IMAX = 0;
+    }
+    
+    /**
+     * SubMovie reference
+     */
+    SubMovie sub_movie = 8;
+
+    // This is a comment for submovie
+    message SubMovie {
+        // This is a comment for sub_rating
+        float sub_rating = 1;
+        // This is a comment for movie format in submovie
+        MovieFormat format = 2;
+    }
+}
+
+message EmptyRequest {}
+
+message MovieRequest {
+    Movie movie = 1;
+}
+
+message SearchByCastRequest {
+    google.protobuf.StringValue castName = 1;
+}
+
+/**
+ * movie result message, contains list of movies
+ */
+message MoviesResult {
+    /**
+     * list of movies
+     */
+    repeated Movie result = 1;
+}
+
+service Example {
+  /**
+  * get all movies
+  */
+  rpc GetMovies (MovieRequest) returns (MoviesResult) {}
+
+  /**
+  * search movies by the name of the cast
+  */
+  rpc SearchMoviesByCast (SearchByCastRequest) returns (Movie) {}
+
+}
+
+service AnotherExample {
+  /**
+  * get all movies
+  */
+  rpc GetMovies (MovieRequest) returns (MoviesResult) {}
+
+  /**
+  * search movies by the name of the cast
+  */
+  rpc SearchMoviesByCast (SearchByCastRequest) returns (Movie) {}
+
+}

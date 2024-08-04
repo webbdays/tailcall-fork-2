@@ -1,0 +1,64 @@
+---
+source: tests/core/spec.rs
+expression: formatted
+---
+scalar Bytes
+
+scalar Date
+
+scalar DateTime
+
+scalar Email
+
+scalar Empty
+
+enum Foo {
+  BAR
+  BAZ
+}
+
+scalar Int128
+
+scalar Int16
+
+scalar Int32
+
+scalar Int64
+
+scalar Int8
+
+scalar JSON
+
+scalar PhoneNumber
+
+type Post {
+  id: Int!
+  user: User
+  userId: Int!
+}
+
+type Query {
+  foo: Foo
+  post(id: Int!): Post
+}
+
+scalar UInt128
+
+scalar UInt16
+
+scalar UInt32
+
+scalar UInt64
+
+scalar UInt8
+
+scalar Url
+
+type User {
+  id: Int
+  name: String
+}
+
+schema {
+  query: Query
+}

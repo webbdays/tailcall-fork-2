@@ -1,0 +1,20 @@
+[package]
+name = "tailcall-typedefs"
+version = "0.1.0"
+edition = "2021"
+
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.82"
+lazy_static = "1.4.0"
+schemars = "0.8.17"
+serde = "1.0.200"
+serde_json = "1.0.116"
+tailcall = { path = "../", default-features = false, features = ["cli"]}
+tokio = { version = "1.37.0", features = ["full"] }
+tracing = "0.1.40"
+tailcall-typedefs-common = { path = "../tailcall-typedefs-common" }
+async-graphql = { workspace = true }
+strum = "0.26.2"
